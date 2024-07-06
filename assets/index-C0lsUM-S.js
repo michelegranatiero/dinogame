@@ -3828,8 +3828,7 @@ void main() {
 varying vec3 normalInterp;\r
 varying vec3 posMV; 
 
-uniform float u_time;
-
+uniform float u_time;\r
 mat3 rotateX(float angle) {\r
   return mat3(\r
     1, 0, 0,\r
@@ -3852,7 +3851,7 @@ mat3 rotateZ(float angle) {\r
     sin(angle), cos(angle), 0,\r
     0, 0, 1\r
   );\r
-}\r
+}
 
 void main() {\r
   normalInterp = normalize( normalMatrix * normal );\r
@@ -3860,44 +3859,25 @@ void main() {\r
   
   
 
-  
   vUv = uv; 
 
-  
-
-  
-  \r
-
-  
-  
-
-  \r
   float oscillationX = 0.01 * sin(u_time * 20.0); 
   float oscillationZ = 0.01 * sin(u_time * 40.0); 
   vec3 startPosition = vec3(\r
       position.x + oscillationX *(-3.0),  
-      position.y /* + sin( u_time * 5.0)/10.0 */, \r
+      position.y , \r
       position.z + oscillationZ *(-3.0)\r
   );
 
   
   vec3 endPosition = rotateY(oscillationX) * startPosition;\r
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(endPosition, 1.0);\r
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(endPosition, 1.0);
 
-  ////////////////////////////////////////////////////////////////////\r
-  ////////////////////////////////////////////////////////////////////\r
-  ////////////////////////////////////////////////////////////////////
-
-  
   
   posMV = (modelViewMatrix * vec4(position, 1.0)).xyz;\r
-  
-  
-
-  
   \r
 
-}`,pS=`precision mediump float; \r
+}`,pS=`precision mediump float; 
 
 varying vec2 vUv;\r
 uniform sampler2D u_texture;
@@ -3911,23 +3891,7 @@ uniform float lightInt;\r
 uniform float ambientInt;\r
 uniform float specularInt;
 
-void main() {\r
-  
-  
-
-  \r
-
-  /* if (pos.x >= 0.0 && pos.y >= 0.0 && pos.z >= 0.0){\r
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\r
-    
-  } */
-
-  
-  
-
-  //////////////////////////////////////////////////////////\r
-  //////////////////////////////////////////////////////////\r
-  //////////////////////////////////////////////////////////
+void main() {
 
   \r
   
@@ -3971,7 +3935,7 @@ void main() {\r
 varying vec3 normalInterp;\r
 varying vec3 posMV; 
 
-uniform float u_time;\r
+uniform float u_time;
 
 mat3 rotateX(float angle) {\r
   return mat3(\r
@@ -4006,23 +3970,22 @@ void main() {\r
   normalInterp = normalize( normalMatrix * normal );
 
   
-  posMV = (modelViewMatrix * vec4(position, 1.0)).xyz;\r
+  posMV = (modelViewMatrix * vec4(position, 1.0)).xyz;
 
   
   
-  float oscillationX = 0.4 * sin(u_time * 2.0); 
   vec3 startPosition = vec3(\r
-      position.x  + exp2(0.015*position.z)*sin(u_time*10.0)*1.0, \r
+      position.x + exp2(0.015*position.z)*sin(u_time*10.0)*1.0, \r
       position.y , \r
       position.z \r
   );
 
   
-  vec3 endPosition = /* rotateY(oscillationX) * */ startPosition;\r
+  vec3 endPosition = startPosition;\r
   gl_Position = projectionMatrix * modelViewMatrix * vec4(endPosition, 1.0);\r
   \r
 
-}`,gS=`precision mediump float; \r
+}`,gS=`precision mediump float; 
 
 varying vec2 vUv;\r
 uniform sampler2D u_texture;
@@ -4036,25 +3999,7 @@ uniform float lightInt;\r
 uniform float ambientInt;\r
 uniform float specularInt;
 
-void main() {\r
-  
-  
-
-  \r
-
-  /* if (pos.x >= 0.0 && pos.y >= 0.0 && pos.z >= 0.0){\r
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\r
-    
-  } */
-
-  
-  
-
-  //////////////////////////////////////////////////////////\r
-  //////////////////////////////////////////////////////////\r
-  //////////////////////////////////////////////////////////
-
-  \r
+void main() {  \r
   
   
   vec3 Id = vec3(lightInt);\r
@@ -4109,7 +4054,6 @@ uniform vec2 u_repeatText;
 
 void main() {  
 
-  
   vec2 coords = vec2(vUv.x, vUv.y + u_time*u_speed); 
 
   
